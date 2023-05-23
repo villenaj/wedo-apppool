@@ -43,7 +43,7 @@ $(document).ready(function () {
                 var htmlData = '';
                 htmlData += ("<option value=0>-</option>");
                 $(response.data.data).each(function (index, row) {
-                    htmlData += ("<option value=" + row.provDesc + ">" + row.provDesc + "</option>");
+                    htmlData += ("<option data-id='" + row.provCode + "' value='" + row.provDesc + "'>" + row.provDesc + "</option>");
                 })
                 // $("#tblHome").empty().append(htmlData);
                 $("#province").empty();
@@ -68,7 +68,8 @@ $(document).ready(function () {
 
     // PROVINCE
     $(document).on('change', '#province ', function (e) {
-        var provCode = $(this).val();
+        // var provCode = $(this).val();
+        var provCode = $(this).find(':selected').data('id');
         axios.get('/onselect_province_load_city', {
             params: {
                 id: provCode
@@ -80,7 +81,7 @@ $(document).ready(function () {
                 htmlData += ("<option value=0>-</option>");
 
                 $(response.data.data).each(function (index, row) {
-                    htmlData += ("<option value=" + row.citymunDesc + ">" + row.citymunDesc + "</option>");
+                    htmlData += ("<option data-id='" + row.citymunCode + "' value='" + row.citymunDesc + "'>" + row.citymunDesc + "</option>");
                 })
                 // $("#tblHome").empty().append(htmlData);
                 $("#city").empty();
@@ -96,7 +97,8 @@ $(document).ready(function () {
 
       // CITY
     $(document).on('change', '#city ', function(e) {
-        var citycode = $(this).val();
+        // var citycode = $(this).val();
+        var citycode = $(this).find(':selected').data('id');
         axios.get('/onselect_city_load_brgy', {
             params: {
                 id: citycode
@@ -108,7 +110,7 @@ $(document).ready(function () {
             htmlData += ("<option value=0>-</option>");
 
             $(response.data.data).each(function(index, row) {
-                htmlData += ("<option value=" + row.brgyDesc + ">" + row.brgyDesc + "</option>");
+                htmlData += ("<option data-id='" + row.brgyCode + "' value='" + row.brgyDesc + "'>" + row.brgyDesc + "</option>");
             })
             // $("#tblHome").empty().append(htmlData);
             $("#barangay").empty();
