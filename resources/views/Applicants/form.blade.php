@@ -87,8 +87,8 @@
                                             <div class="col-lg-4 ">
                                                 <div class="form-floating mb-1 fs-6">
                                                     <select class="form-control" name="gender" id="gender">
-                                                        <option value="0">Female</option>
-                                                        <option value="1">Male</option>
+                                                        <option value="Female">Female</option>
+                                                        <option value="Male">Male</option>
                                                     </select>
                                                     <label for="missionobjective" class="text-muted">Gender<label
                                                             for="" class="text-danger">*</label></label>
@@ -130,10 +130,10 @@
 
                                                 <div class="form-floating mb-1 fs-6">
                                                     <select class="form-control" name="status" id="status">
-                                                        <option value="0">Single</option>
-                                                        <option value="1">Married</option>
-                                                        <option value="2">Divorced</option>
-                                                        <option value="3">Widowed</option>
+                                                        <option value="Single">Single</option>
+                                                        <option value="Married">Married</option>
+                                                        <option value="Divorced">Divorced</option>
+                                                        <option value="Widowed">Widowed</option>
                                                     </select>
                                                     <label for="missionobjective" class="text-muted">Civil
                                                         Status<label for=""
@@ -161,7 +161,21 @@
                                             <label for="missionTitle"
                                                 class="fs-6 fst-italic text-danger py-4">*Complete Mailing
                                                 Address</label>
-                                            <div class=" col-lg-4 form-floating mb-1 fs-6">
+                                            <div class=" col-lg-4 form-floating mb-1">
+                                                <div class="form-floating mb-1">
+                                                    <select  class="form-control" name="province" id="province">
+                                                    </select>
+                                                    <label class="form-check-label" for="inlineCheckbox1">Select Province <label for="" class="text-danger">*</label>									</label>
+                                                    <span class="text-danger small error-text province_error"></span>
+                                                </div>
+                                                <div class="form-floating mb-1">
+                                                    <select  class="form-control" name="city" id="city">
+                                                    </select>
+                                                    <label class="form-check-label" for="inlineCheckbox1">Select City <label for="" class="text-danger">*</label>										</label>
+                                                    <span class="text-danger small error-text city_error"></span>
+                                                </div>
+                                            </div>
+                                            {{-- <div class=" col-lg-4 form-floating mb-1 fs-6">
                                                 <select class="form-select" aria-label="Default select example"
                                                     id="province" name="province">
                                                     <option value="">-</option>
@@ -175,10 +189,10 @@
                                                 </select>
                                                 <label for="missionobjective" class="text-muted">Province<label
                                                         for="" class="text-danger">*</label></label>
-                                                <span class="text-danger small error-text choose_error"></span>
-                                                <div class="form-floating mb-1">
+                                                <span class="text-danger small error-text province_error"></span>
+                                                <div class="form-floating mt-1">
                                                     <select class="form-select" aria-label="Default select example"
-                                                        id="province" name="province">
+                                                        id="city" name="city">
                                                         <option value="">-</option>
                                                         @if (count($resultCity) > 0)
                                                             @foreach ($resultCity as $resultCitys)
@@ -192,23 +206,14 @@
                                                             class="text-danger">*</label></label>
                                                     <span class="text-danger small error-text city_error"></span>
                                                 </div>
-                                            </div>
+                                            </div> --}}
                                             <div class="col-lg-4 ">
                                                 <div class="form-floating mb-1">
-                                                    <select class="form-select" aria-label="Default select example"
-                                                        id="province" name="province">
-                                                        <option value="">-</option>
-                                                        @if (count($resultBrgy) > 0)
-                                                            @foreach ($resultBrgy as $resultBrgys)
-                                                                <option value='{{ $resultBrgys->id }}'>
-                                                                    {{ $resultBrgys->brgyDesc }}</option>
-                                                            @endforeach
-                                                        @else
-                                                        @endif
-                                                        <label for="missionDesc">Barangay<label for=""
-                                                                class="text-danger">*</label></label>
-                                                        <span
-                                                            class="text-danger small error-text barangay_error"></span>
+                                                    <select  class="form-control" name="barangay" id="barangay">
+
+                                                    </select>
+                                                    <label class="form-check-label" for="inlineCheckbox1">Select Barangay <label for="" class="text-danger">*</label>									</label>
+                                                    <span class="text-danger small error-text barangay_error"></span>
                                                 </div>
 
                                                 <div class="form-floating mb-1">
@@ -237,60 +242,6 @@
                                                 </div>
 
                                                 {{-- <button class="btn btn-danger" id="next">Next</button> --}}
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <label for="missionTitle"
-                                                class="fs-6 fst-italic text-danger py-4">*Educatiional
-                                                Background</label>
-                                            <div class="col-lg-4">
-                                                <div class="form-floating mb-1">
-                                                    <input class="form-control" name="ter" id="ter"
-                                                        type="text" placeholder="institution3">
-                                                    <label for="missionDesc">Tertiary<label for=""
-                                                            class="text-danger">*</label></label>
-                                                    <span class="text-danger small error-text province_error"></span>
-                                                </div>
-                                                <div class="form-floating mb-1">
-                                                    <input class="form-control" name="sec" id="sec"
-                                                        type="text" placeholder="instituion2">
-                                                    <label for="missionDesc">Secondary<label for=""
-                                                            class="text-danger">*</label></label>
-                                                    <span class="text-danger small error-text city_error"></span>
-                                                </div>
-                                                <div class="form-floating mb-1">
-                                                    <input class="form-control" name="pri" id="pri"
-                                                        type="text" placeholder="instituion">
-                                                    <label for="missionDesc">Primary<label for=""
-                                                            class="text-danger">*</label></label>
-                                                    <span class="text-danger small error-text city_error"></span>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-4">
-                                                <div class="form-floating mb-1">
-                                                    <input class="form-control" name="comp3" id="comp3"
-                                                        type="text" placeholder="completion3">
-                                                    <!-- <input class="form-control" id="txtBrgy" name="barangay" type="text" placeholder="Barangay"    /> -->
-                                                    <label for="missionDesc">Completion<label for=""
-                                                            class="text-danger">*</label></label>
-                                                    <span class="text-danger small error-text barangay_error"></span>
-                                                </div>
-                                                <div class="form-floating mb-1">
-                                                    <input class="form-control" name="comp2" id="comp2"
-                                                        type="text" placeholder="completion2">
-                                                    <!-- <input class="form-control" id="txtBrgy" name="barangay" type="text" placeholder="Barangay"    /> -->
-                                                    <label for="missionDesc">Completion<label for=""
-                                                            class="text-danger">*</label></label>
-                                                    <span class="text-danger small error-text barangay_error"></span>
-                                                </div>
-                                                <div class="form-floating mb-1">
-                                                    <input class="form-control" name="comp" id="comp"
-                                                        type="text" placeholder="completion">
-                                                    <!-- <input class="form-control" id="txtBrgy" name="barangay" type="text" placeholder="Barangay"    /> -->
-                                                    <label for="missionDesc">Completion<label for=""
-                                                            class="text-danger">*</label></label>
-                                                    <span class="text-danger small error-text barangay_error"></span>
-                                                </div>
                                             </div>
                                         </div>
                                         <br>
