@@ -37,7 +37,7 @@
                                         <option>ALL</option>
                                         @if (count($result) > 0)
                                             @foreach ($result as $results)
-                                                <option value='{{ $results->id }}'>{{ $results->provDesc }}</option>
+                                                <option value='{{ $results->id }}'>{{ $results->pos }}</option>
                                             @endforeach
                                         @else
                                         @endif
@@ -76,7 +76,7 @@
                         <div class="chart-area">
                             <div class="table-responsive">
                                 <table class="table table-hover ">
-                                    <thead class="bg-danger text-white">
+                                    <thead>
                                         <tr>
                                             <th scope="col">Name</th>
                                             <th scope="col">Position</th>
@@ -108,7 +108,6 @@
                     </div>
                     <div class="modal-body">
                         <div class="container-fluid">
-
                             <div class="card mb-3 p-5" style="">
                                 <div class="row g-2">
                                     <div class="col-lg-2 col-md-4 text-center">
@@ -117,9 +116,9 @@
                                     </div>
                                     <div class="col-lg-10 col-md-8 mt-4">
                                         <div class="card-body">
-                                            <h2 class="card-title">Ramon Gemana</h2>
-                                            <h4 class="card-text">IT Supervisor</h4>
-                                            <p class="card-text">Back End</p>
+                                            <h2 id="modalName" class="card-title">Sample</h2>
+                                            <h4 id="modalFirstName" class="card-text">IT Supervisor</h4>
+                                            <p id="modalFirstName" class="card-text">Back End</p>
                                             <p class="card-text">
                                                 <button class="btn btn-info text-white"><i
                                                         class="fa-solid fa-print"></i></button>
@@ -138,11 +137,6 @@
                                         data-bs-target="#contact" type="button" role="tab" aria-controls="contact"
                                         aria-selected="true">Contact Information</button>
                                 </li>
-                                <li class="nav-item" role="presentation">
-                                    <button class="nav-link" id="educational-tab" data-bs-toggle="tab"
-                                        data-bs-target="#educational" type="button" role="tab"
-                                        aria-controls="educational" aria-selected="false">Educational Background</button>
-                                </li>
                             </ul>
                             <div class="tab-content" id="myTabContent">
 
@@ -158,7 +152,7 @@
                                                             <strong>Address</strong>
                                                         </h6>
                                                     </div>
-                                                    <div class="col-sm-9">
+                                                    <div id="modalProvince" class="col-sm-9">
                                                         B15 L4 LESSANDRA HOMES KAYPIAN CSJDM San Jose Del Monte Bulacan 3023
                                                         Philippines
                                                     </div>
@@ -170,7 +164,7 @@
                                                             <strong>Date of Birth</strong>
                                                         </h6>
                                                     </div>
-                                                    <div class="col-sm-9">
+                                                    <div id="modalBirthdate" class="col-sm-9">
                                                         1993-11-02
                                                     </div>
                                                 </div>
@@ -192,7 +186,7 @@
                                                             <strong>Gender</strong>
                                                         </h6>
                                                     </div>
-                                                    <div class="col-sm-9">
+                                                    <div id="modalGender" class="col-sm-9">
                                                         Male
                                                     </div>
                                                 </div>
@@ -203,7 +197,7 @@
                                                             <strong>Civil Status</strong>
                                                         </h6>
                                                     </div>
-                                                    <div class="col-sm-9">
+                                                    <div id="modalMaritalStatus" class="col-sm-9">
                                                         Single
                                                     </div>
                                                 </div>
@@ -214,7 +208,7 @@
                                                             <strong>Email</strong>
                                                         </h6>
                                                     </div>
-                                                    <div class="col-sm-9">
+                                                    <div id="modalEmail" class="col-sm-9">
                                                         gemanaramon@yahoo.com
                                                     </div>
                                                 </div>
@@ -225,7 +219,7 @@
                                                             <strong>Home No</strong>
                                                         </h6>
                                                     </div>
-                                                    <div class="col-sm-9">
+                                                    <div id="modalMobile" class="col-sm-9">
                                                         09352427713
                                                     </div>
                                                 </div>
@@ -236,7 +230,7 @@
                                                             <strong>Contact No</strong>
                                                         </h6>
                                                     </div>
-                                                    <div class="col-sm-9">
+                                                    <div id="modalMobile" class="col-sm-9">
                                                         N/A
                                                     </div>
                                                 </div>
@@ -247,7 +241,7 @@
                                                             <strong>Citizenship</strong>
                                                         </h6>
                                                     </div>
-                                                    <div class="col-sm-9">
+                                                    <div id="modalCitizenship" class="col-sm-9">
                                                         Filipino
                                                     </div>
                                                 </div>
@@ -258,7 +252,7 @@
                                                             <strong>Religion</strong>
                                                         </h6>
                                                     </div>
-                                                    <div class="col-sm-9">
+                                                    <div id="modalReligion" class="col-sm-9">
                                                         Roman Catholic
                                                     </div>
                                                 </div>
@@ -286,7 +280,7 @@
                                                             <strong>Address</strong>
                                                         </h6>
                                                     </div>
-                                                    <div class="col-sm-9">
+                                                    <div id="modalBarangay" class="col-sm-9">
                                                         B15 L4 LESSANDRA HOMES
                                                     </div>
                                                 </div>
@@ -297,7 +291,7 @@
                                                             <strong>Relationship</strong>
                                                         </h6>
                                                     </div>
-                                                    <div class="col-sm-9">
+                                                    <div id="modalMaritalStatus" class="col-sm-9">
                                                         Common Wife
                                                     </div>
                                                 </div>
@@ -308,7 +302,7 @@
                                                             <strong>ICE</strong>
                                                         </h6>
                                                     </div>
-                                                    <div class="col-sm-9">
+                                                    <div id="modalChoice" class="col-sm-9">
                                                         Yes
                                                     </div>
                                                 </div>
@@ -319,7 +313,7 @@
                                                             <strong>Contact Number</strong>
                                                         </h6>
                                                     </div>
-                                                    <div class="col-sm-9">
+                                                    <div id="modalMobile" class="col-sm-9">
                                                         09364414116
                                                     </div>
                                                 </div>
@@ -329,64 +323,38 @@
 
                                     </div>
                                 </div>
+                            </div>
+                            <ul class="nav nav-tabs mt-5" id="myTab" role="tablist">
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link active" id="pdf-tab" data-bs-toggle="tab"
+                                        data-bs-target="#pdfview" type="button" role="tab" aria-controls="contact"
+                                        aria-selected="true">Resume</button>
+                                </li>
+                            </ul>
 
-                                <div class="tab-pane fade" id="educational" role="tabpanel"
-                                    aria-labelledby="educational-tab">
+                            <div class="tab-content" id="myTabContent">
 
+                                <div class="tab-pane fade show active" id="pdfview" role="tabpanel"
+                                    aria-labelledby="pdf-tab">
                                     <div class="card p-5">
-
-                                        <div class="card mb-3">
-
-                                            <div class="card-body">
-                                                <table class="table table-responsive p-3">
-                                                    <thead>
-                                                        <tr>
-                                                            <th scope="col"></th>
-                                                            <th scope="col" class="col-lg-3">School</th>
-                                                            <th scope="col" class="col-lg-3">Year Started</th>
-                                                            <th scope="col" class="col-lg-3">Year End</th>
-                                                            <th scope="col" class="col-lg-3">School Address</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <tr>
-                                                            <th scope="col">Primary</td>
-                                                            <td>OQUENDO NATIONAL ELEMENTARY SCHOOL </td>
-                                                            <td>2000</td>
-                                                            <td>2006</td>
-                                                            <td>OQUENDO CALBAYOG CITY SAMAR</td>
-                                                        </tr>
-
-                                                        <tr>
-                                                            <th scope="col">Secondary</td>
-                                                            <td>OQUENDO NATIONAL HIGH SCHOOL</td>
-                                                            <td>2006</td>
-                                                            <td>2010</td>
-                                                            <td>OQUENDO CALBAYOG CITY SAMAR</td>
-                                                        </tr>
-
-                                                        <tr>
-                                                            <th scope="col">Tertiary</td>
-                                                            <td>NORTHWEST SAMAR STATE UNIVERSITY</td>
-                                                            <td>2010</td>
-                                                            <td>2015</td>
-                                                            <td>CALBAYOG CITY SAMAR</td>
-                                                        </tr>
-
-                                                    </tbody>
-                                                </table>
-                                            </div>
-
-                                        </div>
-
+                                        {{-- <embed src="https://drive.google.com/file/d/1-CBuAk8te_AJq3NXSWdHJOM_fmbBn7NK/preview" type="application/pdf" width="100%" height="600px" /> --}}
+                                        <embed id="modalEmbed" type="application/pdf" width="100%" height="600px" />
+                                        {{-- <embed src="{{ route('pdf.show', ['id' => $pdf->id]) }}" type="application/pdf" width="100%" height="600px" /> --}}
+                                        
                                     </div>
                                 </div>
                             </div>
+
+                        </div>
+                        <div class="container-fluid">
                         </div>
                     </div>
+
                 </div>
             </div>
         </div>
+
+
         <div class="col-lg-12 col-md-12 col-sm-12" style="text-align: end">
             <button class="btn btn-danger radius-1" name="btnPrintTbl" id="btnPrintTbl" type="button"> <i
                     class="fa-solid fa-print"></i> Print</button>
