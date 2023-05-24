@@ -19,6 +19,15 @@ class positionCtrl extends Controller
      * Display a listing of the resource.
      */
 
+     public function getUserInfo(Request $request)
+    {
+        $userId = $request->userId;
+        // Retrieve user information based on the userId
+        $user = mdlapplicant::findOrFail($userId);
+        
+        return response()->json(['data' => $user]);
+    }
+
     public function getAllPosition(Request $request)
     {
 
