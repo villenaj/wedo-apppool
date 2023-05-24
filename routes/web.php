@@ -1,13 +1,11 @@
 <?php
 
-use App\Models\position;
-use App\Http\Models\mdlpool;
-use App\Http\Controllers\pageCtrl;
 use App\Http\Controllers\loginCtrl;
-use App\Http\Controllers\accountCtrl;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\positionCtrl;
 use App\Http\Controllers\applicantCtrl;
+use App\Http\Controllers\ApplicantController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -19,12 +17,8 @@ use App\Http\Controllers\applicantCtrl;
 |
 */
 
-
-
-
-Route::group(['middleware'=>['userValidate']], function(){
-    Route::get('members/summary', [accountCtrl::class, 'index']);//Next page
-
+Route::group(['middleware' => ['userValidate']], function () {
+    Route::get('members/summary', [ApplicantController::class, 'index']); //Next page
 
     Route::get('summary', function () {
 
@@ -46,7 +40,7 @@ Route::group(['middleware'=>['userValidate']], function(){
         return view('Members.profile');
     });
 
-    Route::post('/position/create', [positionCtrl::class, 'create']);//Next page
+    Route::post('/position/create', [positionCtrl::class, 'create']); //Next page
     Route::get('/getAllPosition', [positionCtrl::class, 'getAllPosition']);
     Route::get('/position/edit', [positionCtrl::class, 'edit']);
     Route::post('/position/update', [positionCtrl::class, 'update']);
@@ -74,19 +68,25 @@ Route::group(['middleware'=>['userValidate']], function(){
     Route::post('/get_applicant', [positionCtrl::class, 'get_applicant']);
     Route::get('/inviteInterview', [positionCtrl::class, 'inviteInterview']);
     Route::get('/get_selected_applicant', [positionCtrl::class, 'get_selected_applicant']);
+    Route::post('/get_user_info', [positionCtrl::class, 'getUserInfo']);
+
 });
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('applicants/dashboard', [applicantCtrl::class, 'index']);//Next page
+Route::get('applicants/dashboard', [applicantCtrl::class, 'index']); //Next page
 // Route::get('applicants/dashboard', [applicantCtrl::class, 'index1']);//Next page
+// Route::post('/applicant/create', [applicantCtrl::class, 'create']); //Next page
 
 //page
-Route::get('applicants/form',[pageCtrl::class, 'applicantsform']);
+// Route::get('applicants/form',[pageCtrl::class, 'applicantsform']);
 
-Route::get('authCheck',[loginCtrl::class, 'authCheck']); //check login
-Route::get('testRoute',[loginCtrl::class, 'testRoute']); //test route after success login
-Route::get('logout',[loginCtrl::class, 'logout']); //logout
+Route::get('authCheck', [loginCtrl::class, 'authCheck']); //check login
+Route::get('testRoute', [loginCtrl::class, 'testRoute']); //test route after success login
+Route::get('logout', [loginCtrl::class, 'logout']); //logout
 
-Route::post('/applicant/create', [applicantCtrl::class, 'create']);//Next page
+//route adddress
+Route::get('/load_province', [applicantCtrl::class, 'load_province']);
+Route::get('/onselect_province_load_city', [applicantCtrl::class, 'onselect_province_load_city']);
+Route::get('/onselect_city_load_brgy', [applicantCtrl::class, 'onselect_city_load_brgy']);
 
