@@ -4,21 +4,15 @@ namespace App\Http\Controllers;
 
 use Validator;
 use App\Models\position;
-use App\Models\refprovince;
-use App\Models\refcitymun;
-use App\Models\refbrgy;
 use App\Models\mdlapplicant;
 use Illuminate\Http\Request;
-
+use DB;
 class applicantCtrl extends Controller
 {
     public function index(Request $request)
     {
         $result= position::get();
-        $resultPro = refprovince::orderBy('provDesc', 'asc')->get();
-        $resultCity= refcitymun::orderBy('citymunDesc', 'asc')->get();
-        $resultBrgy= refbrgy::orderBy('brgyDesc', 'asc')->get();
-        return view('Applicants.form')->with('result',$result)->with('resultPro',$resultPro)->with('resultCity',$resultCity)->with('resultBrgy',$resultBrgy);
+        return view('Applicants.form')->with('result',$result);
     }
     // // public function index1(Request $request)
     // {
@@ -28,21 +22,21 @@ class applicantCtrl extends Controller
     public function create(Request $request)
     {
         $validator = Validator::make($request->all(),[
-            // 'fname'=>'required',
-            // 'mname'=>'required',
-            // 'lname'=>'required',
-            // 'gender'=>'required',
-            // 'citizenship'=>'required',
-            // 'religion'=>'required',
-            // 'birthdate'=>'required',
-            // 'status'=>'required',
-            // 'mobile'=>'required',
-            // 'email'=>'required',
-            // 'province'=>'required',
-            // 'city'=>'required',
-            // 'barangay'=>'required',
-            // 'zipcode'=>'required',
-            // 'country'=>'required',
+            'fname'=>'required',
+            'mname'=>'required',
+            'lname'=>'required',
+            'gender'=>'required',
+            'citizenship'=>'required',
+            'religion'=>'required',
+            'birthdate'=>'required',
+            'status'=>'required',
+            'mobile'=>'required',
+            'email'=>'required',
+            'province'=>'required',
+            'city'=>'required',
+            'barangay'=>'required',
+            'zipcode'=>'required',
+            'country'=>'required',
         ],[
             'fname.required'=>"First name is required!",
             'mname.required'=>"Middle name is required!",
@@ -66,38 +60,41 @@ class applicantCtrl extends Controller
             'resume.max' => 'Resume should not exceed 2MB in size!',
         ]);
 
-        $imageName= $request->resume->getClientOriginalName();
-
-        $values= [
-            'first'=>$request->fname,
-            'middle'=>$request->mname,
-            'last'=>$request->lname,
-            'suf'=>$request->suffix,
-            'gen'=>$request->gender,
-            'citizen'=>$request->citizenship,
-            'rel'=>$request->religion,
-            'bdate'=>$request->birthdate,
-            'stat'=>$request->status,
-            'mob'=>$request->mobile,
-            'eml'=>$request->email,
-            'prov'=>$request->province,
-            'ct'=>$request->city,
-            'brgy'=>$request->barangay,
-            'strt'=>$request->street,
-            'zip'=>$request->zipcode,
-            'cntry'=>$request->country,
-            'chse'=>$request->choose,
-            'posid'=>$request->choose,
-            'path'=> $imageName,
-        ];
-
         if(!$validator->passes()){
             return response()->json(['status'=>201, 'error'=>$validator->errors()->toArray()]);
         }else{
+            $id = $request->id;
+            $firstName = $request->fname;
+            $lastName = $request->lname;
+            $extension = $request->file('resume')->getClientOriginalExtension();
+            $fileName = $lastName . '_' . $firstName . '_' . $id . '.' . $extension;
+            $filePath = 'resume/' . $fileName;
+            $request->file('resume')->move(public_path('resume'), $fileName);
 
-            $imageName= $request->resume->getClientOriginalName();
 
-            $request->resume->move(public_path('resume'), $imageName);
+            $values= [
+                'first'=>$request->fname,
+                'middle'=>$request->mname,
+                'last'=>$request->lname,
+                'suf'=>$request->suffix,
+                'gen'=>$request->gender,
+                'citizen'=>$request->citizenship,
+                'rel'=>$request->religion,
+                'bdate'=>$request->birthdate,
+                'stat'=>$request->status,
+                'mob'=>$request->mobile,
+                'eml'=>$request->email,
+                'prov'=>$request->province,
+                'ct'=>$request->city,
+                'brgy'=>$request->barangay,
+                'strt'=>$request->street,
+                'zip'=>$request->zipcode,
+                'cntry'=>$request->country,
+                'chse'=>$request->choose,
+                'posid'=>$request->choose,
+                'path'=> $filePath,
+            ];
+
             $insert = mdlapplicant::create($values);
             if($insert){
                 return response()->json(['status'=>200,'msg'=>"Position succesfully created!"]);
@@ -105,5 +102,34 @@ class applicantCtrl extends Controller
                 return response()->json(['status'=>202,'msg'=>"Error saving!"]);
             }
         }
+    }
+
+    //load province
+    public function load_province(Request $request)
+    {
+        $data = DB::table('refprovince')
+                // ->where('provCode','0410')
+                ->get();
+        return response()->json(['status'=>200,'data'=>$data]);
+    }
+
+    //load city base on province
+    public function onselect_province_load_city(Request $request)
+    {
+    $provcode=$request->id;
+    $data = DB::table('refcitymun')
+        ->where('provCode',$provcode)
+        ->get();
+    return response()->json(['status'=>200,'data'=>$data]);
+    }
+
+    //load brgy base on city
+    public function onselect_city_load_brgy(Request $request)
+    {
+    $citycode=$request->id;
+    $data = DB::table('refbrgy')
+        ->where('citymunCode',$citycode)
+        ->get();
+    return response()->json(['status'=>200,'data'=>$data]);
     }
 }
