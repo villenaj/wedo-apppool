@@ -334,15 +334,58 @@
 
                             <div class="tab-content" id="myTabContent">
 
-                                <div class="tab-pane fade show active" id="pdfview" role="tabpanel"
-                                    aria-labelledby="pdf-tab">
+                                <div class="tab-pane fade show active" id="pdfview" role="tabpanel" aria-labelledby="pdf-tab">
                                     <div class="card p-5">
-                                        {{-- <embed src="https://drive.google.com/file/d/1-CBuAk8te_AJq3NXSWdHJOM_fmbBn7NK/preview" type="application/pdf" width="100%" height="600px" /> --}}
                                         <embed id="modalEmbed" type="application/pdf" width="100%" height="600px" />
-                                        {{-- <embed src="{{ route('pdf.show', ['id' => $pdf->id]) }}" type="application/pdf" width="100%" height="600px" /> --}}
-                                        
                                     </div>
                                 </div>
+                                
+                                <script>
+                                    const modalEmbed = document.getElementById('modalEmbed');
+                                    
+                                    const filePath = modalEmbed.getAttribute('src');
+                                
+                                    const extension = getFileExtension(filePath);
+                                
+                                    if (extension === 'pdf') {
+                                        renderPDF(filePath);
+                                    } else if (extension === 'jpg' || extension === 'jpeg' || extension === 'png') {
+                                        renderImage(filePath);
+                                    } else if (extension === 'doc' || extension === 'docx') {
+                                        renderDocument(filePath);
+                                    } else {
+                                        console.error('Unsupported file format');
+                                    }
+                                
+                                    function getFileExtension(filename) {
+                                        return filename.split('.').pop().toLowerCase();
+                                    }
+                                
+                                    function renderPDF(filePath) {
+                                        modalEmbed.setAttribute('type', 'application/pdf');
+                                        modalEmbed.setAttribute('src', filePath);
+                                        modalEmbed.style.display = 'block';
+                                    }
+                                
+                                    function renderImage(filePath) {
+                                        modalEmbed.setAttribute('src', filePath);
+                                        modalEmbed.style.display = 'block';
+                                    }
+                                
+                                    function renderDocument(filePath) {
+                                        mammoth.extractRawText({ path: filePath })
+                                            .then(function(result) {
+                                            const html = result.value;
+                                            modalEmbed.setAttribute('src', 'data:text/html;charset=utf-8,' + encodeURIComponent(html));
+                                            modalEmbed.style.display = 'block';
+                                        })
+                                        .catch(function(error) {
+                                            console.error('Error converting document to HTML:', error);
+                                        });
+                                    }
+
+                                </script>
+                                
                             </div>
 
                         </div>
