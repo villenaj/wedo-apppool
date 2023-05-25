@@ -34,7 +34,7 @@
                             <div class="form">
                                 <div class="form-floating mb-1">
                                     <select class="form-control" name="posDD" id="posDD">
-                                        <option>ALL</option>
+                                        <option>-</option>
                                         @if (count($result) > 0)
                                             @foreach ($result as $results)
                                                 <option value='{{ $results->id }}'>{{ $results->pos }}</option>
@@ -53,6 +53,9 @@
             @media print {
                 body {
                     visibility: hidden;
+                    width: 1000px;
+                    margin: 0 auto;
+                    display: inline;
                 }
 
                 .print-container {
@@ -68,7 +71,7 @@
             }
         </style>
         <!-- Content Row dar -->
-        <div class="row print-container">
+        <div class="row">
             <div class="col-xl-12 col-lg-12">
                 <div class="card   mb-4">
                     <!-- Card Body -->
@@ -95,8 +98,518 @@
                 </div>
             </div>
         </div>
-
         <div class="modal fade" id="mdlView" data-bs-backdrop="static" data-keyboard="false" tabindex="-1"
+            aria-labelledby="staticBackdrop" aria-hidden="true">
+            <div class="modal-dialog modal-xl">
+                <div class="modal-content">
+
+                    <div class="modal-body ">
+                        <div class="card shadow text-dark ">
+                            <div class="card-body print-container">
+                                <div id="ThisPrintTSDR" class="">
+                                    <form action=""><br><br><br>
+                                        <div class="col-lg-12 borderblck textblck">
+                                            <div class="row-lg-12">
+                                                <div class="col-lg-12">
+                                                    <div class="row d-flex justify-content-end">
+                                                        <div class="col-lg-6">
+                                                            <img class=""style="height:auto; width:50%"
+                                                                src="{{ asset('img/wlogo.png') }}" alt="WeDo BPO Inc.">
+                                                        </div>
+                                                        <div class="col-lg-6 pt-4">
+                                                            <div class="row d-flex text-end">
+                                                                <label class="fs4 fw-bold pt-4">Personal Information
+                                                                    Sheet</label>
+                                                                <label class="fs4 fw-bold">Information Update Sheet</label>
+                                                                <label class="fs4 fw-bold">Version 1/2019</label>
+                                                                <label class="fs4 fw-bold">Page 1 of 1</label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-lg-6 border border-dark">
+                                                    <h6 class="fs fw-bold">APPLICATION DATE</h6>
+                                                </div>
+                                                <div class="col-lg-6 border border-dark">
+                                                    <h6 class="fs fw-bold">POSITION APPLIED FOR</h6>
+                                                </div>
+                                            </div>
+
+
+                                            <div class="row">
+                                                <div class="col-lg-6 border border-dark">
+                                                    <div class="form-group m-0 p-0">
+                                                        <label for="" class="d-none rptAppDate fw-semibold"></label>
+                                                        <p class="" name="lbl_viewAppDate" id="lbl_viewAppDate">
+
+                                                        </p>
+                                                        {{-- <input class="form-control lbl_viewAppDate border-0" name="lbl_viewAppDate" id="lbl_viewAppDate" type="text" placeholder="-" disabled/> --}}
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6 border border-dark">
+                                                    <div class="form-group m-0 p-0">
+                                                        <label for=""
+                                                            class="d-none rptAccountD fs4 fw-semibold"></label>
+                                                        <p class="" name="lbl_viewPosApp" id="lbl_viewPosApp">
+
+                                                        </p>
+                                                        {{-- <input class="form-control lbl_tsdrAccountD border-0"
+                                                            name="lbl_tsdrAccountD" id="lbl_tsdrAccountD" type="text"
+                                                            placeholder="-" /> --}}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-4 border border-dark">
+                                                    <h6 class="fs fw-bold">FIRST NAME(S)</h6>
+                                                </div>
+                                                <div class="col-lg-2 border border-dark">
+                                                    <h6 class="fs fw-bold">MIDDLE NAME</h6>
+                                                </div>
+                                                <div class="col-lg-4 border border-dark">
+                                                    <h6 class="fs fw-bold">FAMILY NAME </h6>
+                                                </div>
+                                                <div class="col-lg-2 border border-dark">
+                                                    <h6 class="fs fw-bold">SUFFIX</h6>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-4 border border-dark">
+                                                    <div class="form-group m-0 p-0">
+                                                        <label for=""
+                                                            class="d-none rptAccountD fs4 fw-semibold"></label>
+                                                        <p class="" name="lbl_viewFn" id="lbl_viewFn">
+
+                                                        </p>
+                                                        {{-- <input class="form-control lbl_tsdrAccountD border-0"
+                                                            name="fname" id="fname" type="text"
+                                                            placeholder="-" /> --}}
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-2 border border-dark">
+                                                    <div class="form-group m-0 p-0">
+                                                        <label for=""
+                                                            class="d-none rptAccountD fs4 fw-semibold"></label>
+                                                        <p class="" name="lbl_viewMn" id="lbl_viewMn">
+
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4 border border-dark">
+                                                    <div class="form-group m-0 p-0">
+                                                        <label for=""
+                                                            class="d-none rptAccountD fs4 fw-semibold"></label>
+                                                        <p class="" name="lbl_viewLn" id="lbl_viewLn">
+
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-2 border border-dark">
+                                                    <div class="form-group m-0 p-0">
+                                                        <label for=""
+                                                            class="d-none rptAccountD fs4 fw-semibold"></label>
+                                                        <p class="" name="lbl_viewSf" id="lbl_viewSf">
+
+                                                        </p>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            {{-- <div class="row">
+                                                <div class="col-lg-12 border border-dark">
+                                                    <h6 class="fs fw-bold">COMPLETE ADDRESS</h6>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-12 border border-dark">
+                                                    <div class="form-group m-0 p-0">
+                                                        <label for=""
+                                                            class="d-none rptAccountD fs4 fw-semibold"></label>
+                                                        <input class="form-control lbl_tsdrAccountD border-0"
+                                                            name="lbl_tsdrAccountD" id="lbl_tsdrAccountD" type="text"
+                                                            placeholder="-" />
+                                                    </div>
+                                                </div>
+                                            </div> --}}
+
+                                            <div class="row">
+                                                <div class="col-lg-4 border border-dark">
+                                                    <h6 class="fs fw-bold">BARANGAY</h6>
+                                                </div>
+                                                <div class="col-lg-4 border border-dark">
+                                                    <h6 class="fs fw-bold">CITY</h6>
+                                                </div>
+                                                <div class="col-lg-2 border border-dark">
+                                                    <h6 class="fs fw-bold">PROVINCE</h6>
+                                                </div>
+                                                <div class="col-lg-2 border border-dark">
+                                                    <h6 class="fs fw-bold">ZIP CODE</h6>
+                                                </div>
+                                            </div>
+
+
+                                            <div class="row">
+                                                <div class="col-lg-4 border border-dark">
+                                                    <div class="form-group m-0 p-0">
+                                                        <label for=""
+                                                            class="d-none rptAccountD fs4 fw-semibold"></label>
+                                                        <p class="" name="lbl_viewBrgy" id="lbl_viewBrgy">
+
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4 border border-dark">
+                                                    <div class="form-group m-0 p-0">
+                                                        <label for=""
+                                                            class="d-none rptAccountD fs4 fw-semibold"></label>
+                                                        <p class="" name="lbl_viewCt" id="lbl_viewCt">
+
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-2 border border-dark">
+                                                    <div class="form-group m-0 p-0">
+                                                        <label for=""
+                                                            class="d-none rptAccountD fs4 fw-semibold"></label>
+                                                        <p class="" name="lbl_viewProv" id="lbl_viewProv">
+
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-2 border border-dark">
+                                                    <div class="form-group m-0 p-0">
+                                                        <label for=""
+                                                            class="d-none rptAccountD fs4 fw-semibold"></label>
+                                                        <p class="" name="lbl_viewZip" id="lbl_viewZip">
+
+                                                        </p>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-6 border border-dark">
+                                                    <h6 class="fs fw-bold">DATE OF BIRTH</h6>
+                                                </div>
+                                                <div class="col-lg-6 border border-dark">
+                                                    <h6 class="fs fw-bold">CIVIL STATUS</h6>
+                                                </div>
+                                            </div>
+
+
+                                            <div class="row">
+                                                <div class="col-lg-6 border border-dark">
+                                                    <div class="form-group m-0 p-0">
+                                                        <label for=""
+                                                            class="d-none rptAccountD fs4 fw-semibold"></label>
+                                                        <p class="" name="lbl_viewBdate" id="lbl_viewBdate">
+
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6 border border-dark">
+                                                    <div class="form-group m-0 p-0">
+                                                        <label for=""
+                                                            class="d-none rptAccountD fs4 fw-semibold"></label>
+                                                        <p class="" name="lbl_viewCS" id="lbl_viewCS">
+
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-6 border border-dark">
+                                                    <h6 class="fs fw-bold">MOBILE NUMBER</h6>
+                                                </div>
+                                                <div class="col-lg-6 border border-dark">
+                                                    <h6 class="fs fw-bold">E-MAIL ADDRESS</h6>
+                                                </div>
+                                            </div>
+
+
+                                            <div class="row">
+                                                <div class="col-lg-6 border border-dark">
+                                                    <div class="form-group m-0 p-0">
+                                                        <label for=""
+                                                            class="d-none rptAccountD fs4 fw-semibold"></label>
+                                                        <p class="" name="lbl_viewContact" id="lbl_viewContact">
+
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6 border border-dark">
+                                                    <div class="form-group m-0 p-0">
+                                                        <label for=""
+                                                            class="d-none rptAccountD fs4 fw-semibold"></label>
+                                                        <p class="" name="lbl_viewEmail" id="lbl_viewEmail">
+
+                                                        </p>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-lg-6 border border-dark">
+                                                    <h6 class="fs fw-bold">CITIZENSHIP</h6>
+                                                </div>
+                                                <div class="col-lg-6 border border-dark">
+                                                    <h6 class="fs fw-bold">RELIGION</h6>
+                                                </div>
+                                            </div>
+
+
+                                            <div class="row">
+                                                <div class="col-lg-6 border border-dark">
+                                                    <div class="form-group m-0 p-0">
+                                                        <label for=""
+                                                            class="d-none rptAccountD fs4 fw-semibold"></label>
+                                                        <p class="" name="lbl_viewCitizen" id="lbl_viewCitizen">
+
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6 border border-dark">
+                                                    <div class="form-group m-0 p-0">
+                                                        <label for=""
+                                                            class="d-none rptAccountD fs4 fw-semibold"></label>
+                                                        <p class="" name="lbl_viewRel" id="lbl_viewRel">
+
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div><br>
+                                            <p style="text-align: start"><a class="fs fw-bold text-black">IMPORTANT
+                                                    NOTICE</a>: It is important that you provide your updated information
+                                                and correct contact details. Should there be a need for the company to
+                                                contact you, you will be contracted through the information you have
+                                                provided herein. It is your duty to ensure that all information are correct.
+                                            </p>
+                                            <p style="text-align: start">
+                                                You guarantee that the e-mail address you have provided is your personal
+                                                e-mail. You guarantee further that you will recieve all correspondences sent
+                                                to the e-mail address you have provided.
+                                            </p>
+                                            <p style="text-align: start">
+                                                Delivery of correspondence is deemed complete as soon as correspondence
+                                                leaves the WeDo e-mail outbox.
+                                            </p><br>
+
+                                            <div class="row">
+                                                <div class="col-lg-4 border border-dark">
+                                                    <h6 class="fs fw-bold">TAX IDENTIFICATION NUMBER</h6>
+                                                </div>
+                                                <div class="col-lg-4 border border-dark">
+                                                    <h6 class="fs fw-bold">SSS NUMBER</h6>
+                                                </div>
+                                                <div class="col-lg-4 border border-dark">
+                                                    <h6 class="fs fw-bold">HDMF (PAG-IBIG) NUMBER</h6>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-4 border border-dark">
+                                                    <div class="form-group m-0 p-0">
+                                                        <label for=""
+                                                            class="d-none rptAccountD fs4 fw-semibold"></label>
+                                                        <p class="" name="lbl_view" id="lbl_view">
+
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4 border border-dark">
+                                                    <div class="form-group m-0 p-0">
+                                                        <label for=""
+                                                            class="d-none rptAccountD fs4 fw-semibold"></label>
+                                                        <p class="" name="lbl_view" id="lbl_view">
+
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4 border border-dark">
+                                                    <div class="form-group m-0 p-0">
+                                                        <label for=""
+                                                            class="d-none rptAccountD fs4 fw-semibold"></label>
+                                                        <p class="" name="lbl_view" id="lbl_view">
+
+                                                        </p>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-lg-4 border border-dark">
+                                                    <h6 class="fs fw-bold">VALID ID 1 TYPE</h6>
+                                                </div>
+                                                <div class="col-lg-4 border border-dark">
+                                                    <h6 class="fs fw-bold">VALID ID NUMBER</h6>
+                                                </div>
+                                                <div class="col-lg-2 border border-dark">
+                                                    <h6 class="fs fw-bold">ISSUED DATE</h6>
+                                                </div>
+                                                <div class="col-lg-2 border border-dark">
+                                                    <h6 class="fs fw-bold">EXPIRY DATE</h6>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-4 border border-dark">
+                                                    <div class="form-group m-0 p-0">
+                                                        <label for=""
+                                                            class="d-none rptAccountD fs4 fw-semibold"></label>
+                                                        <p class="" name="lbl_view" id="lbl_view">
+
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4 border border-dark">
+                                                    <div class="form-group m-0 p-0">
+                                                        <label for=""
+                                                            class="d-none rptAccountD fs4 fw-semibold"></label>
+                                                        <p class="" name="lbl_view" id="lbl_view">
+
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-2 border border-dark">
+                                                    <div class="form-group m-0 p-0">
+                                                        <label for=""
+                                                            class="d-none rptAccountD fs4 fw-semibold"></label>
+                                                        <p class="" name="lbl_view" id="lbl_view">
+
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-2 border border-dark">
+                                                    <div class="form-group m-0 p-0">
+                                                        <label for=""
+                                                            class="d-none rptAccountD fs4 fw-semibold"></label>
+                                                        <p class="" name="lbl_view" id="lbl_view">
+
+                                                        </p>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-lg-4 border border-dark">
+                                                    <h6 class="fs fw-bold">VALID ID 2 TYPE</h6>
+                                                </div>
+                                                <div class="col-lg-4 border border-dark">
+                                                    <h6 class="fs fw-bold">VALID ID NUMBER</h6>
+                                                </div>
+                                                <div class="col-lg-2 border border-dark">
+                                                    <h6 class="fs fw-bold">ISSUED DATE</h6>
+                                                </div>
+                                                <div class="col-lg-2 border border-dark">
+                                                    <h6 class="fs fw-bold">EXPIRY DATE</h6>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-4 border border-dark">
+                                                    <div class="form-group m-0 p-0">
+                                                        <label for=""
+                                                            class="d-none rptAccountD fs4 fw-semibold"></label>
+                                                        <p class="" name="lbl_view" id="lbl_view">
+
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4 border border-dark">
+                                                    <div class="form-group m-0 p-0">
+                                                        <label for=""
+                                                            class="d-none rptAccountD fs4 fw-semibold"></label>
+                                                        <p class="" name="lbl_view" id="lbl_view">
+
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-2 border border-dark">
+                                                    <div class="form-group m-0 p-0">
+                                                        <label for=""
+                                                            class="d-none rptAccountD fs4 fw-semibold"></label>
+                                                        <p class="" name="lbl_view" id="lbl_view">
+
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-2 border border-dark">
+                                                    <div class="form-group m-0 p-0">
+                                                        <label for=""
+                                                            class="d-none rptAccountD fs4 fw-semibold"></label>
+                                                        <p class="" name="lbl_view" id="lbl_view">
+
+                                                        </p>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-lg-4 border border-dark">
+                                                    <h6 class="fs fw-bold">ICE NAME</h6>
+                                                </div>
+                                                <div class="col-lg-4 border border-dark">
+                                                    <h6 class="fs fw-bold">RELATIONSHIP</h6>
+                                                </div>
+                                                <div class="col-lg-4 border border-dark">
+                                                    <h6 class="fs fw-bold">CONTACT NUMBER</h6>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-4 border border-dark">
+                                                    <div class="form-group m-0 p-0">
+                                                        <label for=""
+                                                            class="d-none rptAccountD fs4 fw-semibold"></label>
+                                                        <p class="" name="lbl_view" id="lbl_view">
+
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4 border border-dark">
+                                                    <div class="form-group m-0 p-0">
+                                                        <label for=""
+                                                            class="d-none rptAccountD fs4 fw-semibold"></label>
+                                                        <p class="" name="lbl_view" id="lbl_view">
+
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4 border border-dark">
+                                                    <div class="form-group m-0 p-0">
+                                                        <label for=""
+                                                            class="d-none rptAccountD fs4 fw-semibold"></label>
+                                                        <p class="" name="lbl_view" id="lbl_view">
+
+                                                        </p>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer p-1">
+
+                        <button type="button" id="btnTSDR" name="btnTSDR" class="btn btn-warning mr-2">
+                            <i class="fa-solid fa-print"></i>
+                        </button>
+
+                        <button type="button" id="btnTSDRclose" name="btnTSDRclose" class="btn btn-secondary"
+                            data-bs-dismiss="modal">Close</button>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="mdlRes" data-bs-backdrop="static" data-keyboard="false" tabindex="-1"
             aria-labelledby="staticBackdrop" aria-hidden="true">
             <div class="modal-dialog modal-xl">
                 <div class="modal-content">
@@ -108,222 +621,6 @@
                     </div>
                     <div class="modal-body">
                         <div class="container-fluid">
-                            <div class="card mb-3 p-5" style="">
-                                <div class="row g-2">
-                                    <div class="col-lg-2 col-md-4 text-center">
-                                        <img src="https://miro.medium.com/max/600/1*PiHoomzwh9Plr9_GA26JcA.png"
-                                            alt="profile" class="img-thumbnail rounded-circle d-flex" id="imgProfile">
-                                    </div>
-                                    <div class="col-lg-10 col-md-8 mt-4">
-                                        <div class="card-body">
-                                            <h2 id="modalName" class="card-title">Sample</h2>
-                                            <h4 id="modalFirstName" class="card-text">IT Supervisor</h4>
-                                            <p id="modalFirstName" class="card-text">Back End</p>
-                                            <p class="card-text">
-                                                <button class="btn btn-info text-white"><i
-                                                        class="fa-solid fa-print"></i></button>
-                                                <button class="btn btn-danger text-white"><i
-                                                        class="fa-solid fa-pen-to-square"></i></button>
-                                                <button class="btn btn-success text-white"><i
-                                                        class="fa-solid fa-key"></i></button>
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <ul class="nav nav-tabs mt-5" id="myTab" role="tablist">
-                                <li class="nav-item" role="presentation">
-                                    <button class="nav-link active" id="contact-tab" data-bs-toggle="tab"
-                                        data-bs-target="#contact" type="button" role="tab" aria-controls="contact"
-                                        aria-selected="true">Contact Information</button>
-                                </li>
-                            </ul>
-                            <div class="tab-content" id="myTabContent">
-
-                                <div class="tab-pane fade show active" id="contact" role="tabpanel"
-                                    aria-labelledby="contact-tab">
-                                    <div class="card p-5">
-
-                                        <div class="card mb-3">
-                                            <div class="card-body">
-                                                <div class="row">
-                                                    <div class="col-sm-3">
-                                                        <h6 class="mb-0">
-                                                            <strong>Address</strong>
-                                                        </h6>
-                                                    </div>
-                                                    <div id="modalProvince" class="col-sm-9">
-                                                        B15 L4 LESSANDRA HOMES KAYPIAN CSJDM San Jose Del Monte Bulacan 3023
-                                                        Philippines
-                                                    </div>
-                                                </div>
-                                                <hr>
-                                                <div class="row">
-                                                    <div class="col-sm-3">
-                                                        <h6 class="mb-0">
-                                                            <strong>Date of Birth</strong>
-                                                        </h6>
-                                                    </div>
-                                                    <div id="modalBirthdate" class="col-sm-9">
-                                                        1993-11-02
-                                                    </div>
-                                                </div>
-                                                <hr>
-                                                <div class="row">
-                                                    <div class="col-sm-3">
-                                                        <h6 class="mb-0">
-                                                            <strong>Age</strong>
-                                                        </h6>
-                                                    </div>
-                                                    <div class="col-sm-9">
-                                                        28 Years Old
-                                                    </div>
-                                                </div>
-                                                <hr>
-                                                <div class="row">
-                                                    <div class="col-sm-3">
-                                                        <h6 class="mb-0">
-                                                            <strong>Gender</strong>
-                                                        </h6>
-                                                    </div>
-                                                    <div id="modalGender" class="col-sm-9">
-                                                        Male
-                                                    </div>
-                                                </div>
-                                                <hr>
-                                                <div class="row">
-                                                    <div class="col-sm-3">
-                                                        <h6 class="mb-0">
-                                                            <strong>Civil Status</strong>
-                                                        </h6>
-                                                    </div>
-                                                    <div id="modalMaritalStatus" class="col-sm-9">
-                                                        Single
-                                                    </div>
-                                                </div>
-                                                <hr>
-                                                <div class="row">
-                                                    <div class="col-sm-3">
-                                                        <h6 class="mb-0">
-                                                            <strong>Email</strong>
-                                                        </h6>
-                                                    </div>
-                                                    <div id="modalEmail" class="col-sm-9">
-                                                        gemanaramon@yahoo.com
-                                                    </div>
-                                                </div>
-                                                <hr>
-                                                <div class="row">
-                                                    <div class="col-sm-3">
-                                                        <h6 class="mb-0">
-                                                            <strong>Home No</strong>
-                                                        </h6>
-                                                    </div>
-                                                    <div id="modalMobile" class="col-sm-9">
-                                                        09352427713
-                                                    </div>
-                                                </div>
-                                                <hr>
-                                                <div class="row">
-                                                    <div class="col-sm-3">
-                                                        <h6 class="mb-0">
-                                                            <strong>Contact No</strong>
-                                                        </h6>
-                                                    </div>
-                                                    <div id="modalMobile" class="col-sm-9">
-                                                        N/A
-                                                    </div>
-                                                </div>
-                                                <hr>
-                                                <div class="row">
-                                                    <div class="col-sm-3">
-                                                        <h6 class="mb-0">
-                                                            <strong>Citizenship</strong>
-                                                        </h6>
-                                                    </div>
-                                                    <div id="modalCitizenship" class="col-sm-9">
-                                                        Filipino
-                                                    </div>
-                                                </div>
-                                                <hr>
-                                                <div class="row">
-                                                    <div class="col-sm-3">
-                                                        <h6 class="mb-0">
-                                                            <strong>Religion</strong>
-                                                        </h6>
-                                                    </div>
-                                                    <div id="modalReligion" class="col-sm-9">
-                                                        Roman Catholic
-                                                    </div>
-                                                </div>
-                                                <hr>
-                                                <div class="row">
-                                                    <div class="card-title text-center">
-                                                        <h3><strong>IN CASE OF EMERGENCY</strong></h3>
-                                                    </div>
-                                                </div>
-                                                <hr>
-                                                <div class="row">
-                                                    <div class="col-sm-3">
-                                                        <h6 class="mb-0">
-                                                            <strong>Name</strong>
-                                                        </h6>
-                                                    </div>
-                                                    <div class="col-sm-9">
-                                                        GENIVIVE OBONG
-                                                    </div>
-                                                </div>
-                                                <hr>
-                                                <div class="row">
-                                                    <div class="col-sm-3">
-                                                        <h6 class="mb-0">
-                                                            <strong>Address</strong>
-                                                        </h6>
-                                                    </div>
-                                                    <div id="modalBarangay" class="col-sm-9">
-                                                        B15 L4 LESSANDRA HOMES
-                                                    </div>
-                                                </div>
-                                                <hr>
-                                                <div class="row">
-                                                    <div class="col-sm-3">
-                                                        <h6 class="mb-0">
-                                                            <strong>Relationship</strong>
-                                                        </h6>
-                                                    </div>
-                                                    <div id="modalMaritalStatus" class="col-sm-9">
-                                                        Common Wife
-                                                    </div>
-                                                </div>
-                                                <hr>
-                                                <div class="row">
-                                                    <div class="col-sm-3">
-                                                        <h6 class="mb-0">
-                                                            <strong>ICE</strong>
-                                                        </h6>
-                                                    </div>
-                                                    <div id="modalChoice" class="col-sm-9">
-                                                        Yes
-                                                    </div>
-                                                </div>
-                                                <hr>
-                                                <div class="row">
-                                                    <div class="col-sm-3">
-                                                        <h6 class="mb-0">
-                                                            <strong>Contact Number</strong>
-                                                        </h6>
-                                                    </div>
-                                                    <div id="modalMobile" class="col-sm-9">
-                                                        09364414116
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        {{-- </div> --}}
-
-                                    </div>
-                                </div>
-                            </div>
                             <ul class="nav nav-tabs mt-5" id="myTab" role="tablist">
                                 <li class="nav-item" role="presentation">
                                     <button class="nav-link active" id="pdf-tab" data-bs-toggle="tab"
@@ -397,11 +694,45 @@
             </div>
         </div>
 
-
-        <div class="col-lg-12 col-md-12 col-sm-12" style="text-align: end">
-            <button class="btn btn-danger radius-1" name="btnPrintTbl" id="btnPrintTbl" type="button"> <i
-                    class="fa-solid fa-print"></i> Print</button>
+        {{-- //Mdl for Update Status --}}
+        <div class="modal fade" id="mdlstat" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+            aria-labelledby="staticBackdropLabel" aria-hidden="true" style="background-color: rgb(249 200 200 / 17%);">
+            <div class="modal-dialog   modal-md">
+                <div class="modal-content">
+                    <div class="modal-header bg-danger dragable_touch">
+                        <h5 class="modal-title fst-italic text-white title" id="staticBackdropLabel"><label
+                                for="">
+                                STATUS </label></h5>
+                        <button type="button" class="btn-close text-white closereset_update" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body p-4">
+                        <div class="card  mb-3 rounded">
+                            <div class="card-body ">
+                                <form action="" id="frmPosition">
+                                    <div class="row">
+                                        <div class="form-floating mb-1 fs-6">
+                                            <select class="form-control" name="status" id="status">
+                                                <option value="PASSED">PASSED</option>
+                                                <option value="FAILED">FAILED</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button id="btnUp" type="button" class="btn btn-secondary ">Update</button>
+                    </div>
+                </div>
+            </div>
         </div>
+
+        {{-- <div class="col-lg-12 col-md-12 col-sm-12" style="text-align: end">
+            <button onclick="window.print()" class="btn btn-danger radius-1" name="btnPrintTbl" id="btnPrintTbl" type="button"> <i
+                    class="fa-solid fa-print"></i> Print</button>
+        </div> --}}
     </div>
     <script src="{{ asset('js/index.js') }}" defer></script>
     <script src="{{ asset('js/html2canvas.js') }}" defer></script>
