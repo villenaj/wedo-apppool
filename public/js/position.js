@@ -147,6 +147,28 @@ $(document).ready(function () {
             .then(function () {});
     });
 
+    //getapplicant
+    $(document).on("click", "#mdlView", function () {
+        var id = $(this).val();
+        // idPos=id;
+
+        axios
+            .get("/mdlapplicant/getapplicant", {
+                params: {
+                    id: id,
+                },
+            })
+            .then(function (response) {
+                $(response.data.data).each(function (index, row) {
+                    $("#fname").val(row.first);
+                });
+            })
+
+            .catch(function (error) {})
+            .then(function () {});
+    });
+
+
     $(document).on("click", "#view", function (e) {
         var id = $(this).val();
         gID = id;
@@ -607,9 +629,15 @@ $(document).ready(function () {
                         row.prov +
                         "</td>" +
                         "<td>" +
+                        "<button data-bs-toggle='modal' data-bs-target='#mdlstat'  data-toggle='tooltip' data-placement='bottom' value= '" +
+                        row.id +
+                        "' id='btnviewStat' title='Update'  type='button' class='btn btn-danger btn-sm ml-1'> <i class='fa-solid fa-filter'></i>  </button>" +
+                        "<button data-bs-toggle='modal' data-bs-target='#mdlRes'  data-toggle='tooltip' data-placement='bottom' value= '" +
+                        row.id +
+                        "' id='btnviewRes' title='View Resume'  type='button' class='btn btn-danger btn-sm ml-1'> <i class='fa-regular fa-file'></i>  </button>" +
                         "<button data-bs-toggle='modal' data-bs-target='#mdlView'  data-toggle='tooltip' data-placement='bottom' value= '" +
                         row.id +
-                        "' id='getData' title='View data'  type='button' class='btn btn-danger btn-sm ml-1'> <i class='fa fa-eye'></i>  </button>" +
+                        "' id='btnview' title='View Sheet'  type='button' class='btn btn-danger btn-sm ml-1'> <i class='fa fa-eye'></i>  </button>" +
                         "<button data-toggle='tooltip' data-placement='bottom' value= '" +
                         row.id +
                         "' id='btnInvite' title='Invite for interview'  type='button' class='btn btn-success btn-sm ml-1 spin'> <i class='fa-solid fa-paper-plane'></i>  </button>    </td>" +
@@ -623,54 +651,6 @@ $(document).ready(function () {
             })
             .catch(function (error) {})
             .then(function () {});
-    }
-
-    $(document).on('click', '#getData', function () {
-        var userId = $(this).val();
-        getUserInfo(userId);
-    });
-
-    function getUserInfo(userId) {
-        axios.post('/get_user_info', { userId })
-            .then(response => {
-                const user = response.data.data;
-                console.log(user);
-                const firstName = user.first;
-                const middleName = user.middle || ' ';
-                const lastName = user.last;
-                const fullName = `${firstName} ${middleName} ${lastName}`;
-                
-                document.getElementById('modalName').textContent = fullName;
-                // document.getElementById('modalSuffix').textContent = user.suf || 'N/A';
-                // document.getElementById('modalGender').textContent = user.gen || 'N/A';
-                // document.getElementById('modalCitizenship').textContent = user.citizen || 'N/A';
-                // document.getElementById('modalReligion').textContent = user.rel || 'N/A';
-                // document.getElementById('modalBirthdate').textContent = user.bdate || 'N/A';
-                // document.getElementById('modalMaritalStatus').textContent = user.stat || 'N/A';
-                // document.getElementById('modalMobile').textContent = user.mob || 'N/A';
-                // document.getElementById('modalEmail').textContent = user.eml || 'N/A';
-                // document.getElementById('modalProvince').textContent = user.prov || 'N/A';
-                // document.getElementById('modalCity').textContent = user.ct || 'N/A';
-                // document.getElementById('modalBarangay').textContent = user.brgy || 'N/A';
-                // document.getElementById('modalStreet').textContent = user.strt || 'N/A';
-                // document.getElementById('modalZipCode').textContent = user.zip || 'N/A';
-                // document.getElementById('modalCountry').textContent = user.cntry || 'N/A';
-                // document.getElementById('modalChoice').textContent = user.chse || 'N/A';
-                // document.getElementById('modalImagePath').src = user.path || 'path_to_default_image';
-                // document.getElementById('modalApplicationStatus').textContent = user.appstat || 'N/A';
-                // document.getElementById('modalPositionId').textContent = user.posid || 'N/A';
-
-                const modalPath = user.path || '';
-
-                const embedElement = document.getElementById('modalEmbed');
-                embedElement.src = modalPath;
-
-                const modal = new bootstrap.Modal(document.getElementById('mdlView'));
-                modal.show();
-            })
-            .catch(error => {
-                console.error(error);
-            });
     }
 
     $(document).on("click", "#btnInvite", function (e) {
@@ -766,5 +746,67 @@ $(document).ready(function () {
         var id = $(this).val();
         id_selection = id;
         get_selected_applicant(id_selection);
+    });
+
+
+
+    //getposition
+    $(document).on("click", "#btnview", function () {
+        var id = $(this).val();
+        idPos=id;
+
+        axios
+            .get("/getview_applicant", {
+                params: {
+                    id: idPos,
+                },
+            })
+            .then(function (response) {
+                $(response.data.data).each(function (index, row) {
+                    $("#lbl_viewAppDate").empty().text(row.created_at);
+                    $("#lbl_viewPosApp").empty().text(row.pos);
+                    // $("#lbl_viewPosApp").val(row.pos);
+                    $("#lbl_viewBdate").empty().text(row.bdate);
+                    $("#lbl_viewCS").empty().text(row.stat);
+                    $("#lbl_viewFn").empty().text(row.first);
+                    $("#lbl_viewMn").empty().text(row.middle);
+                    $("#lbl_viewLn").empty().text(row.last);
+                    $("#lbl_viewSf").empty().text(row.suf);
+                    $("#lbl_viewBrgy").empty().text(row.brgy);
+                    $("#lbl_viewCt").empty().text(row.ct);
+                    $("#lbl_viewProv").empty().text(row.prov);
+                    $("#lbl_viewZip").empty().text(row.zip);
+                    $("#lbl_viewContact").empty().text(row.mob);
+                    $("#lbl_viewEmail").empty().text(row.eml);
+                    $("#lbl_viewCitizen").empty().text(row.citizen);
+                    $("#lbl_viewRel").empty().text(row.rel);
+                });
+            })
+            .catch(function(error) {
+            })
+            .then(function() {});
+    });
+
+    //getposition
+    $(document).on("click", "#btnviewRes", function () {
+        var id = $(this).val();
+        idPos=id;
+
+        axios
+            .get("/getview_applicant", {
+                params: {
+                    id: idPos,
+                },
+            })
+            .then(function (response) {
+                $(response.data.data).each(function (index, row) {
+                    const modalPath = row.path || '';
+                    const embedElement = document.getElementById('modalEmbed');
+                    embedElement.src = modalPath;
+                });
+            })
+            .catch(function(error) {
+            })
+            .then(function() {});
     });
 });
